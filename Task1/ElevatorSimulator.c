@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdbool.h>
 void PrintBuilding();
 void MoveElevetor();
-int CheckArrayFor();
+bool DesiredFloorExists();
 
 int main(){
     char floors[6] = {'G', '1', '2', '3', '4', '5'};
@@ -11,9 +12,9 @@ int main(){
     printf("\n  [] Elevator current floor: %c", *pElevatorPosition);
     printf("\n  [?] Which floor would you like to go to? -Floor ");
     //Requests user input till he enters a floor that exists
-    do{
-        scanf("%c", userDesiredFloor);
-    } while (!DesiredFloorExists(userDesiredFloor, floors, 6));
+    
+    
+    
 
 }
 
@@ -35,13 +36,13 @@ void MoveElevator(char floorToMoveTo){
 
 }
 
-int DesiredFloorExists(char floorToFind, char floors[], int floorCount){
+bool DesiredFloorExists(char floorToFind, char floors[6], int floorCount){
     for (int floor = 0; floor < floorCount; floor++){
         if (floorToFind == floors[floor]){
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 
