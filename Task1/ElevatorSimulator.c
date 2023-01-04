@@ -18,8 +18,9 @@ int main(){
     printf("\n  [] Elevator current floor: %c", *pElevatorPosition);
         printf("\n  [?] Which floor would you like to go to? -Floor ");
         scanf("%c", &userDesiredFloor);
-        printf("User desired floor %c", userDesiredFloor);
-        printf("Index of desired floor: %i", FindIndex(userDesiredFloor, floors, 6));
+        char* pUserDesiredFloor = &userDesiredFloor;
+        printf("\nUser desired floor %c", userDesiredFloor);
+        FindIndex(pUserDesiredFloor, floors, 6);
 }
 
 //=----------------------------------------------------------------------------=
@@ -56,7 +57,7 @@ void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int
         else if (floorToMoveToIndex < elevatorIndex){
             pElevatorPosition = &array[elevatorIndex-1];
             // clrscr();
-            system("cls"); //clears terminal
+            system("cls"); 
             PrintBuilding(pElevatorPosition, array, 6);
         }
         Sleep(1);
@@ -64,15 +65,14 @@ void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int
     
 }
 
-int FindIndex(char elementToFind, char array[6], int arrayLength){
+int FindIndex(char* elementToFind, char array[6], int arrayLength){
     int elementIndex;
     for (int i = 0; i < arrayLength; i++){
-        printf("Index: %i, Element: %c", i, array[i]);
-        if (elementToFind == array[i]){
+        char elementOfArray = array[i];
+        if (*elementToFind == elementOfArray){ // error vamu nemoze da otvori memorija za adresata na pointerot
             elementIndex = i;
-        }else{
-            elementIndex = -1;
         }
     }
+    printf("\nElementIndex: %i", elementIndex);
     return elementIndex;
 }
