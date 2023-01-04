@@ -6,7 +6,7 @@
 
 void PrintBuilding();
 void MoveElevetor();
-int FindIndexDesiredFloor();
+int FindIndex();
 
 int main(){
     char floors[6] = {'G', '1', '2', '3', '4', '5'};
@@ -19,11 +19,12 @@ int main(){
         printf("\n  [?] Which floor would you like to go to? -Floor ");
         scanf("%c", &userDesiredFloor);
         printf("User desired floor %c", userDesiredFloor);
-        printf("Index of desired floor: %i",FindIndexDesiredFloor(userDesiredFloor, floors, 6));
-
-    
-
+        printf("Index of desired floor: %i", FindIndex(userDesiredFloor, floors, 6));
 }
+
+//=----------------------------------------------------------------------------=
+//                          Functions
+//=----------------------------------------------------------------------------=
 
 void PrintBuilding(char* pElevatorPosition, char floors[], int floorCount){
         printf("+-------+\n");
@@ -44,17 +45,19 @@ void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int
     int floorToMoveToIndex = FindIndex(floorToMoveTo, array, arrayLength);
 
     while (!(floorToMoveToIndex == elevatorIndex)){
+        //if the floor is above the elevator => move the elevator up
         if (floorToMoveToIndex > elevatorIndex){
             pElevatorPosition = &array[elevatorIndex+1];
             clrscr();
             PrintBuilding(pElevatorPosition, array, 6);
         }
+        //if the floor is below the elevator => move the elevator down
         else if (floorToMoveToIndex < elevatorIndex){
             pElevatorPosition = &array[elevatorIndex-1];
             clrscr();
             PrintBuilding(pElevatorPosition, array, 6);
         }
-        Sleep(0.5);
+        Sleep(1);
     }
     
 }
@@ -62,10 +65,11 @@ void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int
 int FindIndex(char elementToFind, char array[6], int arrayLength){
     int elementIndex;
     for (int i = 0; i < arrayLength; i++){
+        printf("Index: %i, Element: %c", i, array[i]);
         if (elementToFind == array[i]){
             elementIndex = i;
         }else{
-            elementIndex = NULL;
+            elementIndex = -1;
         }
     }
     return elementIndex;
