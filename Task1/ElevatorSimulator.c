@@ -5,7 +5,7 @@
 #include <unistd.h> //time sleep for linux
 
 void PrintBuilding();
-void MoveElevetor();
+void MoveElevator();
 int FindIndex();
 
 int main(){
@@ -16,11 +16,11 @@ int main(){
 
     PrintBuilding(pElevatorPosition, floors, 6);
     printf("\n  [] Elevator current floor: %c", *pElevatorPosition);
-        printf("\n  [?] Which floor would you like to go to? -Floor ");
-        scanf("%c", &userDesiredFloor);
-        char* pUserDesiredFloor = &userDesiredFloor;
-        printf("\nUser desired floor %c", userDesiredFloor);
-        FindIndex(pUserDesiredFloor, floors, 6);
+    printf("\n  [?] Which floor would you like to go to? -Floor ");
+    scanf("%c", &userDesiredFloor);
+    char* pUserDesiredFloor = &userDesiredFloor;
+    //TODO: proveri dali postoi spratot
+    MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, 6);
 }
 
 //=----------------------------------------------------------------------------=
@@ -41,27 +41,29 @@ void PrintBuilding(char* pElevatorPosition, char floors[], int floorCount){
         printf("+-------+");
 }
 
-void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int arrayLength){
+void MoveElevator(char* pElevatorPosition, char* pFloorToMoveTo, char array[], int arrayLength){
     int elevatorIndex = FindIndex(pElevatorPosition, array, arrayLength);
-    int floorToMoveToIndex = FindIndex(floorToMoveTo, array, arrayLength);
+    int floorToMoveToIndex = FindIndex(pFloorToMoveTo, array, arrayLength);
 
     while (!(floorToMoveToIndex == elevatorIndex)){
+        elevatorIndex = FindIndex(pElevatorPosition, array, arrayLength);
         //if the floor is above the elevator => move the elevator up
         if (floorToMoveToIndex > elevatorIndex){
             pElevatorPosition = &array[elevatorIndex+1];
             // clrscr();
-            system("cls"); //clears terminal
+            printf("=------------------------------------="); 
+            // system("cls"); //clears terminal
             PrintBuilding(pElevatorPosition, array, 6);
         }
         //if the floor is below the elevator => move the elevator down
         else if (floorToMoveToIndex < elevatorIndex){
             pElevatorPosition = &array[elevatorIndex-1];
             // clrscr();
-            system("cls"); 
+            printf("=------------------------------------="); 
             PrintBuilding(pElevatorPosition, array, 6);
         }
-        Sleep(1);
     }
+        Sleep(5);
     
 }
 
@@ -73,6 +75,5 @@ int FindIndex(char* elementToFind, char array[6], int arrayLength){
             elementIndex = i;
         }
     }
-    printf("\nElementIndex: %i", elementIndex);
     return elementIndex;
 }
