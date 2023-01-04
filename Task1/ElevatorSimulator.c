@@ -1,6 +1,6 @@
 #include <stdio.h> //standard 
 #include <stdbool.h> //boolean
-#include <conio.h> //clearing screen
+// #include <conio.h> //clearing screen
 #include <windows.h> //time sleep for win
 #include <unistd.h> //time sleep for linux
 
@@ -48,13 +48,15 @@ void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int
         //if the floor is above the elevator => move the elevator up
         if (floorToMoveToIndex > elevatorIndex){
             pElevatorPosition = &array[elevatorIndex+1];
-            clrscr();
+            // clrscr();
+            system("cls"); //clears terminal
             PrintBuilding(pElevatorPosition, array, 6);
         }
         //if the floor is below the elevator => move the elevator down
         else if (floorToMoveToIndex < elevatorIndex){
             pElevatorPosition = &array[elevatorIndex-1];
-            clrscr();
+            // clrscr();
+            system("cls"); //clears terminal
             PrintBuilding(pElevatorPosition, array, 6);
         }
         Sleep(1);
