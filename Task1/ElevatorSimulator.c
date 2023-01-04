@@ -19,7 +19,7 @@ int main(){
     PrintBuilding(pElevatorPosition, floors, arrayLength);
     while (true){
         printf("\n\t[?] Which floor would you like to go to? -Floor ");
-        scanf("%c", &userDesiredFloor);
+        scanf(" %c", &userDesiredFloor);
         char* pUserDesiredFloor = &userDesiredFloor;
         //If the floor doesnt exist in floors ask the user to input another floor
         // if (ElementExists(pUserDesiredFloor, floors, 9)){
