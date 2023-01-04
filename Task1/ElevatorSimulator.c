@@ -10,9 +10,10 @@ int FindIndexDesiredFloor();
 
 int main(){
     char floors[6] = {'G', '1', '2', '3', '4', '5'};
-    char* pElevatorPosition = &floors[5];
+    char* pElevatorPosition = &floors[0];
     char userDesiredFloor;
     bool userDesiredFloorExists = false;
+
     PrintBuilding(pElevatorPosition, floors, 6);
     printf("\n  [] Elevator current floor: %c", *pElevatorPosition);
         printf("\n  [?] Which floor would you like to go to? -Floor ");
@@ -41,18 +42,19 @@ void PrintBuilding(char* pElevatorPosition, char floors[], int floorCount){
 void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int arrayLength){
     int elevatorIndex = FindIndex(pElevatorPosition, array, arrayLength);
     int floorToMoveToIndex = FindIndex(floorToMoveTo, array, arrayLength);
-    while (floorToMoveToIndex == elevatorIndex){
-    if (floorToMoveToIndex > elevatorIndex){
-        pElevatorPosition = &array[elevatorIndex+1];
-        PrintBuilding(pElevatorPosition, array, 6);
-    }
-    else if (floorToMoveToIndex < elevatorIndex){
-        pElevatorPosition = &array[elevatorIndex-1];
-        clrscr();
-        PrintBuilding(pElevatorPosition, array, 6);
-    }
-    
-        
+
+    while (!(floorToMoveToIndex == elevatorIndex)){
+        if (floorToMoveToIndex > elevatorIndex){
+            pElevatorPosition = &array[elevatorIndex+1];
+            clrscr();
+            PrintBuilding(pElevatorPosition, array, 6);
+        }
+        else if (floorToMoveToIndex < elevatorIndex){
+            pElevatorPosition = &array[elevatorIndex-1];
+            clrscr();
+            PrintBuilding(pElevatorPosition, array, 6);
+        }
+        Sleep(0.5);
     }
     
 }
