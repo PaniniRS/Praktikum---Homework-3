@@ -21,7 +21,6 @@ int main(){
         printf("\n\t[?] Which floor would you like to go to? -Floor ");
         scanf("%c", &userDesiredFloor);
         char* pUserDesiredFloor = &userDesiredFloor;
-        fflush(stdin);
         //If the floor doesnt exist in floors ask the user to input another floor
         // if (ElementExists(pUserDesiredFloor, floors, 9)){
         //     printf("\nPlease enter a valid floor letter");
@@ -29,11 +28,14 @@ int main(){
         // }
         MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, 9);
         printf("\n\t[!] Do you want to exit the lift? (Y or N): ");
-        scanf("%c", &userWantsToExit);
-        fflush(stdin);
-        if (userWantsToExit == 'Y'){
+        scanf(" %c", &userWantsToExit);
+        if (userWantsToExit == 'Y' || userWantsToExit == 'y'){
             break;
+        }else if (userWantsToExit == 'N' || userWantsToExit == 'n'){
+            continue;
         }
+        
+        fflush(stdin);
     }
 
     //TODO: proveri dali postoi spratot
@@ -50,6 +52,8 @@ int main(){
     //     }
     //     MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, arrayLength);
     // }
+
+    return 0;
 }
 
 //=----------------------------------------------------------------------------=
