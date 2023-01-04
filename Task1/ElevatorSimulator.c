@@ -1,8 +1,12 @@
-#include <stdio.h>
-#include <stdbool.h>
+#include <stdio.h> //standard 
+#include <stdbool.h> //boolean
+#include <conio.h> //clearing screen
+#include <windows.h> //time sleep for win
+#include <unistd.h> //time sleep for linux
+
 void PrintBuilding();
 void MoveElevetor();
-void FindIndexDesiredFloor();
+int FindIndexDesiredFloor();
 
 int main(){
     char floors[6] = {'G', '1', '2', '3', '4', '5'};
@@ -11,21 +15,11 @@ int main(){
     bool userDesiredFloorExists = false;
     PrintBuilding(pElevatorPosition, floors, 6);
     printf("\n  [] Elevator current floor: %c", *pElevatorPosition);
-    //Requests user input till he enters a floor that exists
-    // do{
         printf("\n  [?] Which floor would you like to go to? -Floor ");
         scanf("%c", &userDesiredFloor);
-        FindIndexDesiredFloor(userDesiredFloor, floors, 6);
-        //checks whether the inputed floor exits 
-    //     for (int i = 0; i < 6; i++){
-    //         if (userDesiredFloor == floors[i]){
-    //             userDesiredFloorExists = true;
-    //         }
-    //     }
-        
-    // } while (!userDesiredFloorExists);
-    
-    
+        printf("User desired floor %c", userDesiredFloor);
+        printf("Index of desired floor: %i",FindIndexDesiredFloor(userDesiredFloor, floors, 6));
+
     
 
 }
@@ -44,14 +38,33 @@ void PrintBuilding(char* pElevatorPosition, char floors[], int floorCount){
         printf("+-------+");
 }
 
-void MoveElevator(char floorToMoveTo){
+void MoveElevator(char* pElevatorPosition, char floorToMoveTo, char array[], int arrayLength){
+    int elevatorIndex = FindIndex(pElevatorPosition, array, arrayLength);
+    int floorToMoveToIndex = FindIndex(floorToMoveTo, array, arrayLength);
+    while (floorToMoveToIndex == elevatorIndex){
+    if (floorToMoveToIndex > elevatorIndex){
+        pElevatorPosition = &array[elevatorIndex+1];
+        PrintBuilding(pElevatorPosition, array, 6);
+    }
+    else if (floorToMoveToIndex < elevatorIndex){
+        pElevatorPosition = &array[elevatorIndex-1];
+        clrscr();
+        PrintBuilding(pElevatorPosition, array, 6);
+    }
+    
+        
+    }
     
 }
 
-void FindIndexDesiredFloor(char* desiredFloor, char floors[], int floorCount){
-    for (int i = 0; i < floorCount; i++){
-        if (desiredFloor == floors[i]){
-            printf("%i", i);
+int FindIndex(char elementToFind, char array[6], int arrayLength){
+    int elementIndex;
+    for (int i = 0; i < arrayLength; i++){
+        if (elementToFind == array[i]){
+            elementIndex = i;
+        }else{
+            elementIndex = NULL;
         }
     }
+    return elementIndex;
 }
