@@ -7,37 +7,47 @@
 void PrintBuilding();
 void MoveElevator();
 int FindIndex();
+bool ElementExists();
 
 int main(){
     int arrayLength = 9;
-    char floors[9] = {'-3', '-2', '-1', 'G', '1', '2', '3', '4', '5'};
+    char floors[9] = {'D', 'C', 'B', 'G', '1', '2', '3', '4', '5'};
     char* pElevatorPosition = &floors[0];
     char userDesiredFloor;
-    bool userDesiredFloorExists = false;
-    // bool userWantsToExit = false;
+    char userWantsToExit;
 
     PrintBuilding(pElevatorPosition, floors, arrayLength);
-    printf("\n\t[] Elevator current floor: %c", *pElevatorPosition);
-
-    printf("\n\t[?] Which floor would you like to go to? -Floor ");
-
-    //first time the elevator is moved
-    scanf("%c", &userDesiredFloor);
-    char* pUserDesiredFloor = &userDesiredFloor;
-    MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, arrayLength);
-
-    //TODO: proveri dali postoi spratot
     while (true){
-        char userDesiredFloor;
-        printf("\n\t [?] Write E to exit or which floor you want the lift to move to: ");
-        scanf("%c", &userDesiredFloor); // ne prima vrednost
+        printf("\n\t[?] Which floor would you like to go to? -Floor ");
+        scanf("%c", &userDesiredFloor);
         char* pUserDesiredFloor = &userDesiredFloor;
-
-        if(userDesiredFloor == 'E'){
+        //If the floor doesnt exist in floors ask the user to input another floor
+        if (!(ElementExists(userDesiredFloor, floors, 9))){
+            printf("Please enter a valid floor letter");
+            continue;
+        }
+        MoveElevator(pElevatorPosition, userDesiredFloor, floors, 9);
+        printf("Do you want to exit the lift? (Y or N): ");
+        scanf("%c", userWantsToExit);
+        if (userWantsToExit == "Y"){
             break;
         }
-        MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, arrayLength);
     }
+
+    //TODO: proveri dali postoi spratot
+
+
+    // while (true){
+    //     char userDesiredFloor;
+    //     printf("\n\t [?] Write E to exit or which floor you want the lift to move to: ");
+    //     scanf("%c", &userDesiredFloor); // ne prima vrednost
+    //     char* pUserDesiredFloor = &userDesiredFloor;
+
+    //     if(userDesiredFloor == 'E'){
+    //         break;
+    //     }
+    //     MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, arrayLength);
+    // }
 }
 
 //=----------------------------------------------------------------------------=
@@ -84,4 +94,15 @@ int FindIndex(char* elementToFind, char array[9], int arrayLength){
         }
     }
     return elementIndex;
+}
+
+bool ElementExists(char* elementToFind, char array[9], int arrayLength){
+    bool elementExists = false;
+    for (int i = 0; i < arrayLength; i++){
+        if (elementToFind == array[i]){
+            elementExists = true;
+        }
+        return elementExists;
+    }
+    
 }
