@@ -7,7 +7,7 @@
 void PrintBuilding();
 void MoveElevator();
 int FindIndex();
-bool ElementExists();
+int ElementExists();
 
 int main(){
     int arrayLength = 9;
@@ -21,11 +21,18 @@ int main(){
         printf("\n\t[?] Which floor would you like to go to? -Floor ");
         scanf(" %c", &userDesiredFloor);
         char* pUserDesiredFloor = &userDesiredFloor;
-        //If the floor doesnt exist in floors ask the user to input another floor
-        // if (ElementExists(pUserDesiredFloor, floors, 9)){
-        //     printf("\nPlease enter a valid floor letter");
-        //     continue;
-        // }
+
+        //// !!! DOESNT WORK \/
+
+        // If the floor doesnt exist in floors ask the user to input another floor
+        int elementExists = (ElementExists(pUserDesiredFloor, floors, 9));
+        if ( elementExists == 1){
+            printf("\n\t[!!!]\tPlease enter a valid floor letter\t[!!!]");
+            continue;
+        }
+
+        // !!! DOESNT WORK ^
+
         MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, 9);
         printf("\n\t[!] Do you want to exit the lift? (Y or N): ");
         scanf(" %c", &userWantsToExit);
@@ -102,11 +109,11 @@ int FindIndex(char* elementToFind, char array[9], int arrayLength){
     return elementIndex;
 }
 
-bool ElementExists(char* elementToFind, char array[9], int arrayLength){
-    bool elementExists = false;
+int ElementExists(char* elementToFind, char array[9], int arrayLength){
+    int elementExists = 1;
     for (int i = 0; i < arrayLength; i++){
         if (*elementToFind == array[i]){
-            elementExists = true;
+            elementExists = 0;
         }
         return elementExists;
     }
