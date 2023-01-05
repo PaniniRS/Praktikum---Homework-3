@@ -1,19 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <conio.h>
 
 void PrintGameOutput();
 void PrintStickman();
 void PrintGuessingWord();
 void CheckGuess();
 char GetUserGuess();
-#define ARR_SIZE(array) ( sizeof((array)) / sizeof((array[0])) )
+void FillGuessArray();
+#define ArraySize(array) ( sizeof((array)) / sizeof((array[0])) )
 
 
 int main(){
     int wrongGuesses = 0;
     char* words[] ={"test", "dog", "cat"};
-    char* randomWord = words[rand() % ARR_SIZE(words)];
+    char* randomWord = words[rand() % ArraySize(words)];
+    char guessArray[ArraySize(randomWord)];
+    FillGuessArray(randomWord, guessArray);
     printf("Random word selected: %s", randomWord);
 
     //
@@ -28,7 +32,8 @@ int main(){
 }
 
 void PrintGameOutput(){
-
+    PrintGuessingWord();
+    PrintStickman();
 }
 // void CheckGuess(char* pUserGuess, char array[], char guessedArray[], int arrayLength){
 //     for (int i = 0; i < arrayLength; i++){
@@ -58,3 +63,9 @@ char GetUserGuess(){
     }
 }
 
+//might not work
+void FillGuessArray(char* word, char* guessArray){
+    for (int i = 0; i < ArraySize(word); i++){
+       guessArray[i] = '_';
+    }
+}
