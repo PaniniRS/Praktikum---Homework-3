@@ -14,6 +14,7 @@ void FillGuessArray();
 
 int main(){
     int wrongGuesses = 0;
+    int* pWrongGuesses = 0;
     char* words[] ={"test", "dog", "cat"};
     char* randomWord = words[rand() % ArraySize(words)];
     char guessArray[ArraySize(randomWord)];
@@ -28,6 +29,7 @@ int main(){
     char* pUserGuess = &userGuess;
 
     printf("UserGuess: %c", userGuess);
+    CheckGuess(pUserGuess, randomWord, guessArray, ArraySize(randomWord), pWrongGuesses);
 
 
 }
@@ -36,16 +38,16 @@ void PrintGameOutput(){
     PrintGuessingWord();
     PrintStickman();
 }
-void CheckGuess(char* pUserGuess, char* array, char* guessedArray, int arrayLength, int* pWrongGuesses){
+void CheckGuess(char* pUserGuess, char* word, char* guessedArray, int wordLength, int* pWrongGuesses){
     int CounterCorrectlyGuessed = 0;
-    for (int i = 0; i < arrayLength; i++){
-        if (pUserGuess == array[i]){
-            guessedArray[i] = array[i];
+    for (int i = 0; i < wordLength; i++){
+        if (pUserGuess == word[i]){ //FIX: for some reason it thinks word[i] is an integer
+            guessedArray[i] = word[i]; 
             CounterCorrectlyGuessed++;
         }
     }
     if (CounterCorrectlyGuessed < 1){
-        pWrongGuesses = *pWrongGuesses + 1;
+        pWrongGuesses = *pWrongGuesses + 1; // TODO: make it so the value of that the pointer points to gets increased by 1
         printf("Your letter isn't present in the word(( Wrong Guesses so far %*i ", *pWrongGuesses);
     }else
     {
