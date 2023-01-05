@@ -29,21 +29,30 @@ int main(){
 
     printf("UserGuess: %c", userGuess);
 
+
 }
 
 void PrintGameOutput(){
     PrintGuessingWord();
     PrintStickman();
 }
-// void CheckGuess(char* pUserGuess, char array[], char guessedArray[], int arrayLength){
-//     for (int i = 0; i < arrayLength; i++){
-//         if (pUserGuess == array[i]){
-//             guessedArray[i] = array[i];
-//         }
-        
-//     }
+void CheckGuess(char* pUserGuess, char* array, char* guessedArray, int arrayLength, int* pWrongGuesses){
+    int CounterCorrectlyGuessed = 0;
+    for (int i = 0; i < arrayLength; i++){
+        if (pUserGuess == array[i]){
+            guessedArray[i] = array[i];
+            CounterCorrectlyGuessed++;
+        }
+    }
+    if (CounterCorrectlyGuessed < 1){
+        pWrongGuesses = *pWrongGuesses + 1;
+        printf("Your letter isn't present in the word(( Wrong Guesses so far %*i ", *pWrongGuesses);
+    }else
+    {
+        printf("You correctly guessed %i characters from the word!", CounterCorrectlyGuessed);
+    }
     
-// }
+}
 void PrintStickman(){
 
 }
