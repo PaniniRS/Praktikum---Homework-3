@@ -3,17 +3,17 @@
 #include <time.h>
 
 char PickRandomWord();
-void Game();
 void PrintGameOutput();
+void PrintStickman();
+void PrintGuessingWord();
 void CheckGuess();
 char GetUserGuess();
 
 int main(){
-    
     int wrongGuesses = 0;
-    char* words[] ={"Test","Dog" , "Cat"};
-
-
+    char* words[] ={"Test", "Dog", "Cat"};
+    char randomWord = PickRandomWord(words, 3); 
+    printf("%s", randomWord);
 }
 
 char PickRandomWord(char words[], int arrayLength){
@@ -23,13 +23,23 @@ char PickRandomWord(char words[], int arrayLength){
     return word;
 }
 
-void Game(){
 
-}
 void PrintGameOutput(){
 
 }
-void CheckGuess(){
+void CheckGuess(char* pUserGuess, char array[], char guessedArray[], int arrayLength){
+    for (int i = 0; i < arrayLength; i++){
+        if (array[i] == pUserGuess){
+            guessedArray[i] = array[i];
+        }
+        
+    }
+    
+}
+void PrintStickman(){
+
+}
+void PrintGuessingWord(){
 
 }
 char GetUserGuess(){
