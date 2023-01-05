@@ -12,17 +12,16 @@ char GetUserGuess();
 
 int main(){
     int wrongGuesses = 0;
-    char userGuess;
-    char* words[] ={"Test", "Dog", "Cat"};
+    char* words[] ={"test", "dog", "cat"};
     char* randomWord = words[rand() % ARR_SIZE(words)];
     printf("Random word selected: %s", randomWord);
 
     //
-    printf("\nEnter your guess character: ");
-    scanf(" %s", &userGuess);
+    // printf("\nEnter your guess character: ");
+    // scanf(" %s", &userGuess);
     //
-    // char userGuess = GetUserGuess();
-    // char* pUserGuess = &userGuess;
+    char userGuess = GetUserGuess();
+    char* pUserGuess = &userGuess;
 
     printf("UserGuess: %c", userGuess);
 
@@ -49,6 +48,13 @@ void PrintGuessingWord(){
 char GetUserGuess(){
     char userGuess;
     printf("\nEnter your guess character: ");
-    scanf(" %s", userGuess);
+    scanf(" %s", &userGuess);
+    if (userGuess > 96 && userGuess < 123){
     return userGuess;
+    }else if (userGuess > 64 && userGuess < 91){
+        return userGuess + 32;
+    }else{
+        printf("Error with your guessed character, only letters allowed!");
+    }
 }
+
