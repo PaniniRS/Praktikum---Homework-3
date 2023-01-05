@@ -1,0 +1,2 @@
+
+    char userGuess = GetUserGuess();
