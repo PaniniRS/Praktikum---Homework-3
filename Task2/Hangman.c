@@ -24,7 +24,7 @@ char PickRandomWord(char words[], int arrayLength){
 }
 
 void Game(){
-    
+
 }
 void PrintGameOutput(){
 
@@ -33,5 +33,8 @@ void CheckGuess(){
 
 }
 char GetUserGuess(){
-
+    char userGuess = "";
+    printf("\nEnter your guess character: ");
+    scanf(" %s", userGuess);
+    return userGuess;
 }
