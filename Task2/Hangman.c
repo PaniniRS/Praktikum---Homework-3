@@ -3,22 +3,34 @@
 #include <time.h>
 #include <conio.h>
 
+#define ArraySize(array) ( sizeof((array)) / sizeof((array[0])) )
+const char *words[] = { "apple", "banana", "pear", "grape", "orange" };
+
 void PrintGameOutput();
 void PrintStickman();
 void PrintGuessingWord();
 void CheckGuess();
 char GetUserGuess();
 void FillGuessArray();
-#define ArraySize(array) ( sizeof((array)) / sizeof((array[0])) )
 
 
 int main(){
+    srand(time(NULL));  // seed the random number generator
+    char lettersGuessed[26] = {0};  // array to store tried letters
+    int lettersGuessedCount = 0;  // number of tried letters
+    char userGuess;
     int wrongGuesses = 0;
     int* pWrongGuesses = 0;
-    char* words[] ={"test", "dog", "cat"};
     char* randomWord = words[rand() % ArraySize(words)];
+    int randomWordLength = strlen(randomWord);
     char guessArray[ArraySize(randomWord)];
-    FillGuessArray(randomWord, guessArray);
+    
+    //fills guessArray with _
+    for (int i = 0; i < randomWordLength; i++) {
+        guessArray[i] = '_';  
+    }
+
+
     printf("Random word selected: %s", randomWord);
 
     //
@@ -58,8 +70,11 @@ void CheckGuess(char* pUserGuess, char* word, char* guessedArray, int wordLength
 void PrintStickman(){
 
 }
-void PrintGuessingWord(){
-
+void PrintGuessingWord(char* guessedArray, int arrayLength){
+    for (int i = 0; i < arrayLength; i++){
+        printf("%")
+    }
+    
 }
 char GetUserGuess(){
     char userGuess;
@@ -74,9 +89,3 @@ char GetUserGuess(){
     }
 }
 
-//might not work
-void FillGuessArray(char* word, char* guessArray){
-    for (int i = 0; i < ArraySize(word); i++){
-       guessArray[i] = '_';
-    }
-}
