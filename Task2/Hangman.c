@@ -6,7 +6,7 @@
 
 #define MAXMISTAKES 6
 #define ArraySize(array) ( sizeof((array)) / sizeof((array[0])) )
-const char *words[] = { "apple", "banana", "pear", "grape", "orange" };
+const char *words[] = { "test", "dog", "cat", "koala", "penguin", "giraffe" };
 
 // Art for stickman figure, stored in hangman string array
 const char *hangman[] = {
@@ -74,11 +74,18 @@ int main(){
     // printf("Random word selected: %s", randomWord); USE FOR DEBUGGING
 
     while (userWrongGuesses < MAXMISTAKES){
-        printf("Word: %s\n", guessArray); 
+        printf("\nWord: %s\n", guessArray); 
 
-    
-        printf("\nEnter a letter: ");
+        printf("\nEnter your guess letter: ");
         scanf(" %c", &userGuess);
+
+        //turns the guessed letter into lower case, only allows alphabet letters as imput
+        if (userGuess > 64 && userGuess < 91){
+            userGuess = userGuess + 32;
+        }else if (!((userGuess > 64 && userGuess < 91) || (userGuess > 96 && userGuess < 123))){
+            printf("!!! Error with your guessed character, only letters allowed! !!!");
+            continue;
+        }
 
         //check if the letter has already been guessed
         int letterAlreadyGuessed = 0;
@@ -121,4 +128,8 @@ int main(){
     }
 
     return 0;
+}
+
+char GuessLetterToLowerCase(){
+        
 }
