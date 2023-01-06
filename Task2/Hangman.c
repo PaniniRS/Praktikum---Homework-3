@@ -4,6 +4,7 @@
 #include <string.h>
 #include <conio.h>
 
+#define MAXMISTAKES 6
 #define ArraySize(array) ( sizeof((array)) / sizeof((array[0])) )
 const char *words[] = { "apple", "banana", "pear", "grape", "orange" };
 
@@ -55,14 +56,14 @@ const char *hangman[] = {
 
 int main(){
     srand(time(NULL));  // seed the random number generator
-    char userLettersGuessed[26] = {0};  // array to store tried letters
-    int userLettersGuessedCount = 0;  // number of tried letters
-    char userGuess;
-    int userWrongGuesses = 0;
-    int* pUserWrongGuesses = 0;
-    char* randomWord = words[rand() % ArraySize(words)];
+    int randomWordIndex = rand() % ArraySize(words);
+    const char* randomWord = words[rand() % randomWordIndex];
     int randomWordLength = strlen(randomWord);
     char guessArray[randomWordLength + 1];
+    char userLettersGuessed[26] = {0};  // array to store tried letters
+    int userLettersGuessedCount = 0;  // number of tried letters
+    int userWrongGuesses = 0;
+    char userGuess;
     
     //fills guessArray with _
     for (int i = 0; i < randomWordLength; i++) {
@@ -70,9 +71,9 @@ int main(){
     }
 
 
-    printf("Random word selected: %s", randomWord);
+    // printf("Random word selected: %s", randomWord); USE FOR DEBUGGING
 
-    while (userWrongGuesses < 6){
+    while (userWrongGuesses < MAXMISTAKES){
         printf("Word: %s\n", guessArray); 
 
     
