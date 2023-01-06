@@ -47,21 +47,6 @@ int main(){
         fflush(stdin);
     }
 
-    //TODO: proveri dali postoi spratot
-
-
-    // while (true){
-    //     char userDesiredFloor;
-    //     printf("\n\t [?] Write E to exit or which floor you want the lift to move to: ");
-    //     scanf("%c", &userDesiredFloor); // ne prima vrednost
-    //     char* pUserDesiredFloor = &userDesiredFloor;
-
-    //     if(userDesiredFloor == 'E'){
-    //         break;
-    //     }
-    //     MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, arrayLength);
-    // }
-
     return 0;
 }
 
