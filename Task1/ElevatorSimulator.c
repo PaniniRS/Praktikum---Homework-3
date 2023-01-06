@@ -22,16 +22,18 @@ int main(){
         scanf(" %c", &userDesiredFloor);
         char* pUserDesiredFloor = &userDesiredFloor;
 
-        //// !!! DOESNT WORK \/
 
         // If the floor doesnt exist in floors ask the user to input another floor
-        int elementExists = (ElementExists(pUserDesiredFloor, floors, 9));
-        if ( elementExists == 1){
+        int elementExists = 1;
+        for (int i = 0; i < arrayLength; i++){
+        if (*pUserDesiredFloor == floors[i]){
+            elementExists = 0;
+        }
+    }
+        if (elementExists){
             printf("\n\t[!!!]\tPlease enter a valid floor letter\t[!!!]");
             continue;
         }
-
-        // !!! DOESNT WORK ^
 
         MoveElevator(pElevatorPosition, pUserDesiredFloor, floors, 9);
         printf("\n\t[!] Do you want to exit the lift? (Y or N): ");
